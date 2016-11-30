@@ -40,6 +40,7 @@
 #include <ctime>
 #include "ecn2.h"
 #include "zzn12a.h"
+#include <cybozu/benchmark.hpp>
 
 using namespace std;
 
@@ -771,6 +772,22 @@ fpa=fpc=fpx=fpmq=fpsq=fpaq=0;
     cout << "Bob's  Key= " << H2(GT_pow(sp,b,X,q,WB,BB)) << endl;
     cout << "Server Key= " << H2(GT_pow(bp,s,X,q,WB,BB)) << endl;
 
+#if 1
+	{
+        ECn2 P = sS;
+        ECn Q = Bob;
+        ZZn12 r = res;
+        Big xx,yy;
+        ZZn Qx,Qy;
+        Q.get(xx,yy); Qx=xx; Qy=yy;
+	    P.norm();
+        BOOL Ok;
+        CYBOZU_BENCH_C("pairing", 100, Ok = fast_pairing, P, Qx, Qy, x, X, r);
+//        BOOL Ok=fast_pairing(P,Qx,Qy,x,X,r);
+        if (!Ok) puts("ERR");
+        puts("OK");
+	}
+#endif
     return 0;
 }
 
