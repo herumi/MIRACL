@@ -8,6 +8,9 @@
  *   ... but change __int64 to long long
  */
 
+#ifdef __x86_64__
+#include "mirdef.h64"
+#else
 #define MIRACL 32
 #define MR_LITTLE_ENDIAN    /* This may need to be changed        */
 #define mr_utype int
@@ -27,4 +30,5 @@
 
 #define MAXBASE ((mr_small)1<<(MIRACL-1))
 
+#endif
 
