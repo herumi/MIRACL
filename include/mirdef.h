@@ -10,6 +10,8 @@
 
 #ifdef __x86_64__
 #include "mirdef.h64"
+#elif defined __x86__
+#include "mirdef.lnx"
 #else
 #define MIRACL 32
 #define MR_LITTLE_ENDIAN    /* This may need to be changed        */
